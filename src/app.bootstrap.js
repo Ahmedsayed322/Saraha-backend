@@ -32,7 +32,8 @@ const bootstrap = async (app) => {
     }),
     helmet({
       contentSecurityPolicy: false,
-      frameguard: { action: 'ALLOW-FROM', origin: '*' },
+      frameguard: false,
+      crossOriginResourcePolicy: false,
     }),
     GlobalRateLimiter,
     express.json(),
