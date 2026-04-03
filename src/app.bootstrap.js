@@ -30,7 +30,9 @@ const bootstrap = async (app) => {
     cors({
       ...corsOption,
     }),
-    helmet(),
+    helmet({
+      contentSecurityPolicy: false, // Disable CSP for API endpoints
+    }),
     GlobalRateLimiter,
     express.json(),
   );
@@ -42,6 +44,12 @@ const bootstrap = async (app) => {
   app.use('{/dummy}', (req, res, next) => {
     res.status(404).json({ message: `this ${req.originalUrl} is not exist` });
   });
-  // app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+
+  // Only listen when not in Vercel serverless environment
+  if (!process.env.VERCEL) {
+    app.listen(PORT, () =>
+      console.log(`Example app listening on port ${PORT}!`),
+    );
+  }
 };
 export default bootstrap;
