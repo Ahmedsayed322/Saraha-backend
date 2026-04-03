@@ -31,7 +31,8 @@ const bootstrap = async (app) => {
       ...corsOption,
     }),
     helmet({
-      contentSecurityPolicy: false, // Disable CSP for API endpoints
+      contentSecurityPolicy: false,
+      frameguard: { action: 'ALLOW-FROM', origin: '*' },
     }),
     GlobalRateLimiter,
     express.json(),
