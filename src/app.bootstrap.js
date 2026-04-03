@@ -35,11 +35,11 @@ const bootstrap = async (app) => {
     cors({
       ...corsOption,
     }),
-    // helmet({
-    //   contentSecurityPolicy: false,
-    //   frameguard: false,
-    //   crossOriginResourcePolicy: false,
-    // }),
+    helmet({
+      contentSecurityPolicy: false,
+      frameguard: false,
+      crossOriginResourcePolicy: false,
+    }),
     GlobalRateLimiter,
     express.json(),
   );
