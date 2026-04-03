@@ -1,4 +1,4 @@
-import express from 'express';
+
 import { userRouter } from './modules/user/index.js';
 import { GlobalErrorHandler, KnownErrorHandler } from './middlewares/index.js';
 import { env } from './config/index.js';
@@ -9,10 +9,9 @@ import cors from 'cors';
 import { redis_connection } from './DB/index.js';
 import { messageRouter } from './modules/message/index.js';
 import helmet from 'helmet';
-import { rateLimit } from 'express-rate-limit';
+
 import { GlobalRateLimiter } from './utils/limiter/rate.limiter.js';
-const bootstrap = async () => {
-  const app = express();
+const bootstrap = async (app) => {
   const { PORT } = env;
   await connectDb();
   await redis_connection();
