@@ -39,6 +39,11 @@ const bootstrap = async (app) => {
     express.json(),
   );
 
+  // Health check endpoint
+  app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', time: new Date().toISOString() });
+  });
+
   app.use('/users', userRouter);
   app.use('/messages', messageRouter);
   app.use(KnownErrorHandler, GlobalErrorHandler);
