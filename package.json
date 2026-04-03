@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "main": "src/main.js",
   "type": "module",
-  "engines": {
-    "node": "22.15.1"
-  },
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development  nodemon  ./src/main.js --enable-turbo-mode",
-    "start:prod": "cross-env NODE_ENV=production node  ./src/main.js --enable-turbo-mode"
+    "start:dev": "cross-env NODE_ENV=development  nodemon  ./src/app.js --enable-turbo-mode",
+    "start:prod": "cross-env NODE_ENV=production node  ./src/app.js --enable-turbo-mode"
   },
   "author": "",
   "license": "ISC",
