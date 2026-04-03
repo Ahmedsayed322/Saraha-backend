@@ -1,4 +1,4 @@
-
+import express from 'express';
 import { userRouter } from './modules/user/index.js';
 import { GlobalErrorHandler, KnownErrorHandler } from './middlewares/index.js';
 import { env } from './config/index.js';
@@ -42,6 +42,6 @@ const bootstrap = async (app) => {
   app.use('{/dummy}', (req, res, next) => {
     res.status(404).json({ message: `this ${req.originalUrl} is not exist` });
   });
-  app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+  // app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 };
 export default bootstrap;
