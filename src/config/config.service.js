@@ -1,16 +1,21 @@
 import { config } from 'dotenv';
 import { resolve } from 'path';
-config({ path: resolve('./src/config/.env') });
+
+// Only load .env file if not in production/Vercel
+if (process.env.NODE_ENV !== 'production') {
+  config({ path: resolve('./src/config/.env') });
+}
+
 export const PORT = process.env.PORT || 5000;
-export const NODE_ENV = process.env.NODE_ENV;
+export const NODE_ENV = process.env.NODE_ENV || 'development';
 export const MONGOOSE_URI = process.env.MONGOOSE_URI;
 export const DB_NAME = process.env.DB_NAME;
-export const SALT = +process.env.SALT;
+export const SALT = +process.env.SALT || 10;
 export const CONSUMER_SECRET = process.env.CONSUMER_SECRET;
 export const CONSUMER_KEY = process.env.CONSUMER_KEY;
 export const MY_EMAIL = process.env.MY_EMAIL;
 export const JWT_SECRET = process.env.JWT_SECRET;
-export const CLIENT_IDS = process.env.CLIENT_IDS.split(',');
+export const CLIENT_IDS = process.env.CLIENT_IDS ? process.env.CLIENT_IDS.split(',') : [];
 export const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME;
 export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
 export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
@@ -18,5 +23,7 @@ export const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 export const RESET_TOKEN_SECRET = process.env.RESET_TOKEN_SECRET;
 export const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
 export const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-export const WHITE_LIST =
-  [...process.env.WHITE_LIST.split(','), undefined] || [];
+export const WHITE_LIST = process.env.WHITE_LIST 
+  ? [...process.env.WHITE_LIST.split(','), undefined] 
+  : [undefined];
+

@@ -13,9 +13,14 @@ import helmet from 'helmet';
 import { GlobalRateLimiter } from './utils/limiter/rate.limiter.js';
 const bootstrap = async (app) => {
   const { PORT } = env;
-  await connectDb();
-  await redis_connection();
-  await asymmetric.runForFirstTime();
+  try {
+    await connectDb();
+    await redis_connection();
+    await asymmetric.runForFirstTime();
+  } catch (err) {
+    console.error('Initialization error:', err.message);
+    // Don't crash on initialization errors in serverless - let requests fail gracefully
+  }
   const corsOption = {
     origin: (origin, cb) => {
       if (env.WHITE_LIST.includes(origin)) {
